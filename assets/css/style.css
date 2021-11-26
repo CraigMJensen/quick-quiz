@@ -1,0 +1,66 @@
+body {
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  padding-top: 2rem;
+  background-color: lightseagreen;
+  border-bottom: 0.25rem solid darkblue;
+}
+
+.top-title {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  text-decoration: underline;
+  background-color: lightseagreen;
+  color: darkblue;
+  font-size: 3em;
+}
+
+.info-bar {
+  display: flex;
+  padding: 1rem;
+}
+
+.quiz-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 60%;
+  height: 25em;
+  border: 0.25rem solid darkblue;
+  border-top: none;
+  background-color: lightseagreen;
+  color: darkblue;
+}
+
+.incorrect {
+  font-size: 1.4rem;
+  border-top: 0.125rem solid darkblue;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
+  width: 60%;
+  height: 10rem;
+  border: 0.25rem solid darkblue;
+  border-top: none;
+  background-color: lightseagreen;
+}
+
+.start-btn,
+.high-score {
+  padding: 1rem;
+  border: 0.25rem solid rgb(34, 120, 178);
+  font-size: 1.5rem;
+  background-color: darkblue;
+  color: lightseagreen;
+}
