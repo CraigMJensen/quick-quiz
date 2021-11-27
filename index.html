@@ -15,22 +15,22 @@
             <header class="header">
                 <h1 class="title top-title">Code Quiz</h1>
                 <div class="info-bar">
-                    <p class="score top-title">Score:</p>
-                    <p class="timer top-title">Timer:</p>
+                    <p class="score top-title" id="score">Score:</p>
+                    <p class="timer top-title" id="timer">Timer:</p>
                 </div>
             </header>
         </div>
-        <div class="quiz-box">
-            <h2 class="question">Question</h2>
-            <p class="answerA answers">Answer</p>
-            <p class="answerB answers">Answer</p>
-            <p class="answerC answers">Answer</p>
-            <p class="answerD answers">Answer</p>
-            <p class="incorrect">Incorrect</p>
+        <div id="quiz-box">
+            <h2 id="question">Question</h2>
+            <button id="answerA" class="answers buttons">Answer</button>
+            <button id="answerB" class="answers buttons">Answer</button>
+            <button id="answerC" class="answers buttons">Answer</button>
+            <button id="answerD" class="answers buttons">Answer</button>
+            <p id="correct">Incorrect</p>
         </div>
-        <div class="buttons">
-            <button class="start-btn">Start Quiz</button>
-            <button class="high-score">High Scores</button>
+        <div id="start-box">
+            <button class="buttons" id="start-btn">Start Quiz</button>
+            <button class="buttons" id="high-score">High Scores</button>
         </div>
     </div>
     <script src="./assets/js/script.js"></script>

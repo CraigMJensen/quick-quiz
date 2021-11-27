@@ -25,8 +25,9 @@ body {
   padding: 1rem;
 }
 
-.quiz-box {
+#quiz-box {
   display: flex;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -35,16 +36,20 @@ body {
   height: 25em;
   border: 0.25rem solid darkblue;
   border-top: none;
-  background-color: lightseagreen;
   color: darkblue;
+  background-color: lightseagreen;
 }
 
-.incorrect {
+#quiz-box h2 {
+  font-size: 2rem;
+}
+
+#correct {
   font-size: 1.4rem;
   border-top: 0.125rem solid darkblue;
 }
 
-.buttons {
+#start-box {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -56,9 +61,8 @@ body {
   background-color: lightseagreen;
 }
 
-.start-btn,
-.high-score {
-  padding: 1rem;
+.buttons {
+  padding: 0.75rem;
   border: 0.25rem solid rgb(34, 120, 178);
   font-size: 1.5rem;
   background-color: darkblue;

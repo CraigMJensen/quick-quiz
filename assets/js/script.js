@@ -1,75 +1,54 @@
-var questions = [
-    {
-        question: 'Which will change the text color?',
-        answers: {
-            a: 'text-decoration',
-            b: 'font-family',
-            c: 'color',
-            d: 'background-color',
-        },
-        correctAnswer: 'c: color'
-    },
-    {
-        question: '',
-        answers: {
-            a: '',
-            b: '',
-            c: '',
-            d: '',
-        },
-        correctAnswer: ''
-    },
-    {
-        question: '',
-        answers: {
-            a: '',
-            b: '',
-            c: '',
-            d: '',
-        },
-        correctAnswer: ''
-    },
-    {
-        question: '',
-        answers: {
-            a: '',
-            b: '',
-            c: '',
-            d: '',
-        },
-        correctAnswer: ''
-    },
-    {
-        question: '',
-        answers: {
-            a: '',
-            b: '',
-            c: '',
-            d: '',
-        },
-        correctAnswer: ''
-    },
-];
-let startQuiz = document.querySelector('.start-btn');
+var questions = [{ question: "First question", answerA: "Answer a", answerB: "Answer b", answerC: "Answer c", answerD: "Answer d", correct: "Correct answer" },
+{ question: "Second question", answerA: "Answer a", answerB: "Answer b", answerC: "Answer c", answerD: "Answer d", correct: "Correct answer" },
+{ question: "Third question", answerA: "Answer a", answerB: "Answer b", answerC: "Answer c", answerD: "Answer d", correct: "Correct answer" },
+{ question: "Fourth question", answerA: "Answer a", answerB: "Answer b", answerC: "Answer c", answerD: "Answer d", correct: "Correct answer" },
+{ question: "Fifth question", answerA: "Answer a", answerB: "Answer b", answerC: "Answer c", answerD: "Answer d", correct: "Correct answer" }];
 
-startQuiz.addEventListener('click', generateQuiz => {
+var quizBox = document.querySelector('#quiz-box');
+var question = document.querySelector('#question');
+var answerA = document.querySelector('#answerA');
+var answerB = document.querySelector('#answerB');
+var answerC = document.querySelector('#answerC');
+var answerD = document.querySelector('#answerD');
+var correctAnswer = document.querySelector('#correct');
+var startQuiz = document.querySelector('#start-btn');
+var highScore = document.querySelector('#high-score');
+var timer = document.querySelector('#timer');
+var score = document.querySelector('#score');
+
+// Function to beginQuiz
+var lastQuestion = questions.length - 1;
+let currentQuestion = 0;
+
+function displayQuestion() {
+    let q = questions[currentQuestion];
+
+    question.innerHTML = '<p>' + q.question + '</p>';
+
+}
 
 
-})
+
+startQuiz.addEventListener('click', displayQuestion);
 
 
-/*start button changes to next question button.
 
-*When I click start quiz the first question appears and the timer begins.
+// Function to start timer
 
-*once I click an answer I am told if it was correct or not,
+/*When I click start quiz the first question appears and the timer begins.
 
-*click next question to load next question.
+* Start button deactivated
 
-*loop until no more questions remain or time runs out.
+*i am told if the answer is correct, display next question
 
-*show score (time remaining -5 seconds per wrong answer and +5 seconds per correct answer)
+*if incorrect, loose 10 seconds, display next question.
+
+*continue until time runs out or no more questions remain.
+
+*Display score
 
 *score is saved in local storage
 
-*start button returns to start quiz for continued plays */
+*High scores are displayed when button is clicked.
+
+*start button reactivates to start quiz for continued plays */
