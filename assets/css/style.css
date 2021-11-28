@@ -33,7 +33,7 @@ body {
   align-items: center;
   margin: 0 auto;
   width: 60%;
-  height: 25em;
+  height: 100%;
   border: 0.25rem solid darkblue;
   border-top: none;
   color: darkblue;
@@ -42,10 +42,12 @@ body {
 
 #quiz-box h2 {
   font-size: 2rem;
+  margin: 10px;
 }
 
-#correct {
+#correctAnswer {
   font-size: 1.4rem;
+  margin-bottom: 1rem;
   border-top: 0.125rem solid darkblue;
 }
 
@@ -61,10 +63,25 @@ body {
   background-color: lightseagreen;
 }
 
+.choiceButtons {
+  padding: 0.25rem;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+.choiceButtons:hover {
+  background-color: cornflowerblue;
+}
+
 .buttons {
-  padding: 0.75rem;
+  padding: 0.25rem;
+  margin: 1rem;
   border: 0.25rem solid rgb(34, 120, 178);
   font-size: 1.5rem;
   background-color: darkblue;
   color: lightseagreen;
+}
+
+p {
+  margin: 0;
 }
