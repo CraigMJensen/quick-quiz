@@ -25,22 +25,20 @@ body {
   padding: 1rem;
 }
 
-#quiz-box {
-  display: flex;
-
+#question-div {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin: 0 auto;
   width: 60%;
   height: 100%;
   border: 0.25rem solid darkblue;
-  border-top: none;
   color: darkblue;
   background-color: lightseagreen;
 }
 
-#quiz-box h2 {
+#question-div h2 {
   font-size: 2rem;
   margin: 10px;
 }
@@ -71,6 +69,7 @@ body {
 
 .choiceButtons:hover {
   background-color: cornflowerblue;
+  color: darkblue;
 }
 
 .buttons {
