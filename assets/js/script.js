@@ -17,11 +17,12 @@
 // Variables to call elements
 var body = document.body;
 var quizBox = document.querySelector('#question-div');
+var h2El = document.querySelector('#question-text');
 var answerBtn1 = document.querySelector('#question1');
 var answerBtn2 = document.querySelector('#question2');
 var answerBtn3 = document.querySelector('#question3');
 var answerBtn4 = document.querySelector('#question4');
-var buttonPress = document.querySelectorAll('.choiceButtons').length;
+var buttonPress = document.querySelectorAll('.choiceButtons');
 
 var questionText = document.querySelector('#question-text');
 var answerA = document.querySelector('.answerA');
@@ -88,19 +89,21 @@ var correctAnswersArray = [correctAnswer1, correctAnswer2, correctAnswer3, corre
 
 // Create Quiz elements
 
-
+var questionIndex = 0;
 // Function to beginQuiz
 function beginQuiz() {
     startTimer();
     startQuiz.disabled = true;
+    nextQuestion();
 
-    let h2El = document.createElement('h2');
+
+
+};
+
+// Next question function
+var nextQuestion = function () {
+    var h2El = document.createElement('h2');
     h2El.setAttribute('id', 'question-text');
-    h2El.textContent = questionsArray[4];
-    answerBtn1.textContent = (choicesArray[4].answers1);
-    answerBtn2.textContent = (choicesArray[4].answers2);
-    answerBtn3.textContent = (choicesArray[4].answers3);
-    answerBtn4.textContent = (choicesArray[4].answers4);
     body.appendChild(quizBox);
     quizBox.appendChild(h2El);
     quizBox.appendChild(answerBtn1);
@@ -108,16 +111,23 @@ function beginQuiz() {
     quizBox.appendChild(answerBtn3);
     quizBox.appendChild(answerBtn4);
 
-};
-
-// Next question function
-var nextQuestion = function () {
+    h2El.textContent = questionsArray[questionIndex];
+    answerBtn1.textContent = (choicesArray[questionIndex].answers1);
+    answerBtn2.textContent = (choicesArray[questionIndex].answers2);
+    answerBtn3.textContent = (choicesArray[questionIndex].answers3);
+    answerBtn4.textContent = (choicesArray[questionIndex].answers4);
 
 }
 
 
 // Function for button clicks to check correct or incorrect answers
+function rightWrong(event) {
+    if (event.target.matches(".choiceButtons")) {
 
+        questionIndex++;
+        nextQuestion();
+    }
+}
 // Function to start timer
 function startTimer() {
     var timeLeft = 60;
@@ -137,7 +147,8 @@ function startTimer() {
 };
 
 startQuiz.addEventListener('click', beginQuiz);
-// answerA.addEventListener('click',);
-// answerB.addEventListener('click',);
-// answerC.addEventListener('click',);
-// answerD.addEventListener('click',);
+answerA.addEventListener('click', rightWrong);
+answerB.addEventListener('click', rightWrong);
+answerC.addEventListener('click', rightWrong);
+answerD.addEventListener('click', rightWrong);
+
