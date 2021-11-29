@@ -122,12 +122,22 @@ var nextQuestion = function () {
 
 // Function for button clicks to check correct or incorrect answers
 function rightWrong(event) {
-    if (event.target.matches(".choiceButtons")) {
 
+    if (event.target.matches(".choiceButtons")) {
+        var h2El = document.querySelector('#question-text');
+        h2El.remove();
         questionIndex++;
         nextQuestion();
+
     }
+
 }
+
+// Function for score
+
+// function to show correct answer
+
+
 // Function to start timer
 function startTimer() {
     var timeLeft = 60;
