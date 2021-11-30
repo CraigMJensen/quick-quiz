@@ -22,7 +22,7 @@ var answerBtn1 = document.querySelector('#question1');
 var answerBtn2 = document.querySelector('#question2');
 var answerBtn3 = document.querySelector('#question3');
 var answerBtn4 = document.querySelector('#question4');
-var buttonPress = document.querySelectorAll('.choiceButtons');
+var buttonPress = document.getElementById('choices-div');
 
 var questionText = document.querySelector('#question-text');
 var answerA = document.querySelector('.answerA');
@@ -116,7 +116,6 @@ var nextQuestion = function () {
     answerBtn2.textContent = (choicesArray[questionIndex].answers2);
     answerBtn3.textContent = (choicesArray[questionIndex].answers3);
     answerBtn4.textContent = (choicesArray[questionIndex].answers4);
-
 }
 
 
@@ -129,9 +128,12 @@ function rightWrong(event) {
         questionIndex++;
         nextQuestion();
 
+
+
     }
 
 }
+
 
 // Function for score
 
