@@ -87,7 +87,7 @@ var correctAnswer3 = choices3.answers4;
 var correctAnswer4 = choices4.answers4;
 var correctAnswer5 = choices5.answers1;
 var correctAnswersArray = [correctAnswer1, correctAnswer2, correctAnswer3, correctAnswer4, correctAnswer5];
-var clickedAnswers = correctAnswersArray[questionIndex];
+
 
 // Create Quiz elements
 
@@ -120,18 +120,38 @@ var nextQuestion = function () {
     answerBtn2.textContent = (choicesArray[questionIndex].answers2);
     answerBtn3.textContent = (choicesArray[questionIndex].answers3);
     answerBtn4.textContent = (choicesArray[questionIndex].answers4);
-}
+
+
+
+    answerBtn1.addEventListener("click", () => {
+        console.log("clicked A");
+
+    })
+    answerBtn2.addEventListener("click", () => {
+        console.log("clicked B");
+
+    })
+    answerBtn3.addEventListener("click", () => {
+        console.log("clicked C");
+
+    })
+    answerBtn4.addEventListener("click", () => {
+        console.log("clicked D");
+
+    })
+
+
+};
 
 
 // Function for button clicks to check correct or incorrect answers
 function rightWrong(event) {
 
+
     if (event.target.matches("#choiceButtons")) {
         var h2El = document.querySelector('#question-text');
+
         h2El.remove();
-
-
-
 
 
 
@@ -139,19 +159,7 @@ function rightWrong(event) {
         nextQuestion();
     }
 }
-// Checking to see if all buttons log
-answerBtn1.addEventListener("click", () => {
-    console.log("clicked A");
-})
-answerBtn2.addEventListener("click", () => {
-    console.log("clicked B");
-})
-answerBtn3.addEventListener("click", () => {
-    console.log("clicked C");
-})
-answerBtn4.addEventListener("click", () => {
-    console.log("clicked D");
-})
+
 // Function for score
 
 // Function to show correct answer
