@@ -1,5 +1,7 @@
 /*When I click start quiz the first question loads and the timer begins.
 
+*after picking first answer move to next question
+
 *i am told if the answer is correct, add 5 seconds, display next question
 
 *if incorrect, loose 10 seconds, display next question.
@@ -18,11 +20,11 @@
 var body = document.body;
 var quizBox = document.querySelector('#question-div');
 var h2El = document.querySelector('#question-text');
-var answerBtn1 = document.querySelector('#question1');
-var answerBtn2 = document.querySelector('#question2');
-var answerBtn3 = document.querySelector('#question3');
-var answerBtn4 = document.querySelector('#question4');
-var buttonPress = document.querySelectorAll('.choiceButtons');
+var answerBtn1 = document.querySelector('.answerA');
+var answerBtn2 = document.querySelector('.answerB');
+var answerBtn3 = document.querySelector('.answerC');
+var answerBtn4 = document.querySelector('.answerD');
+var buttonPress = document.querySelectorAll('#choiceButtons');
 
 var questionText = document.querySelector('#question-text');
 var answerA = document.querySelector('.answerA');
@@ -85,7 +87,7 @@ var correctAnswer3 = choices3.answers4;
 var correctAnswer4 = choices4.answers4;
 var correctAnswer5 = choices5.answers1;
 var correctAnswersArray = [correctAnswer1, correctAnswer2, correctAnswer3, correctAnswer4, correctAnswer5];
-
+var clickedAnswers = correctAnswersArray[questionIndex];
 
 // Create Quiz elements
 
@@ -102,6 +104,8 @@ function beginQuiz() {
 
 // Next question function
 var nextQuestion = function () {
+
+
     var h2El = document.createElement('h2');
     h2El.setAttribute('id', 'question-text');
     body.appendChild(quizBox);
@@ -116,27 +120,43 @@ var nextQuestion = function () {
     answerBtn2.textContent = (choicesArray[questionIndex].answers2);
     answerBtn3.textContent = (choicesArray[questionIndex].answers3);
     answerBtn4.textContent = (choicesArray[questionIndex].answers4);
-
 }
 
 
 // Function for button clicks to check correct or incorrect answers
 function rightWrong(event) {
 
-    if (event.target.matches(".choiceButtons")) {
+    if (event.target.matches("#choiceButtons")) {
         var h2El = document.querySelector('#question-text');
         h2El.remove();
+
+
+
+
+
+
         questionIndex++;
         nextQuestion();
-
     }
-
 }
-
+// Checking to see if all buttons log
+answerBtn1.addEventListener("click", () => {
+    console.log("clicked A");
+})
+answerBtn2.addEventListener("click", () => {
+    console.log("clicked B");
+})
+answerBtn3.addEventListener("click", () => {
+    console.log("clicked C");
+})
+answerBtn4.addEventListener("click", () => {
+    console.log("clicked D");
+})
 // Function for score
 
-// function to show correct answer
+// Function to show correct answer
 
+// Function for end game
 
 // Function to start timer
 function startTimer() {
