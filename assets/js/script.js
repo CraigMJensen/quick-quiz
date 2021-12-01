@@ -36,6 +36,9 @@ var highScore = document.querySelector('#high-score');
 var timer = document.querySelector('#timer');
 var score = document.querySelector('#score');
 
+var timeLeft = 60;
+var timeInterval;
+
 // Array of questions and choices and correct answers
 var questions = [
   {
@@ -99,66 +102,70 @@ var nextQuestion = function () {
   answerBtn2.textContent = questions[questionIndex].answers[1];
   answerBtn3.textContent = questions[questionIndex].answers[2];
   answerBtn4.textContent = questions[questionIndex].answers[3];
+
+  getScore();
 };
 
 // Function for button clicks to check correct or incorrect answers
 function rightWrong(press) {
   if (press.currentTarget.matches('.answerA')) {
-    console.log('clicked A');
-    console.log(questions[questionIndex].correctAnswer);
     if (
       questions[questionIndex].answers[0] ===
       questions[questionIndex].correctAnswer
     ) {
-      console.log('right');
-    } else console.log('wrong');
-    timeLeft = timeLeft - 10;
+      timeLeft = timeLeft + 5;
+    } else {
+      timeLeft = timeLeft - 10;
+    }
   } else if (press.currentTarget.matches('.answerB')) {
     if (
       questions[questionIndex].answers[1] ===
       questions[questionIndex].correctAnswer
     ) {
-      console.log('right');
-      console.log('clicked B');
-      console.log(questions[questionIndex].correctAnswer);
-    } else console.log('wrong');
-    timeLeft = timeLeft - 10;
+      timeLeft = timeLeft + 5;
+    } else {
+      timeLeft = timeLeft - 10;
+    }
   } else if (press.currentTarget.matches('.answerC')) {
     if (
       questions[questionIndex].answers[2] ===
       questions[questionIndex].correctAnswer
     ) {
-      console.log('right');
-      console.log('clicked C');
-      console.log(questions[questionIndex].correctAnswer);
-    } else console.log('wrong');
-    timeLeft = timeLeft - 10;
+      timeLeft = timeLeft + 5;
+    } else {
+      timeLeft = timeLeft - 10;
+    }
   } else if (press.currentTarget.matches('.answerD')) {
     if (
       questions[questionIndex].answers[3] ===
       questions[questionIndex].correctAnswer
     ) {
-      console.log('right');
-      console.log('clicked D');
-      console.log(questions[questionIndex].correctAnswer);
-    } else console.log('wrong');
-    timeLeft = timeLeft - 10;
+      timeLeft = timeLeft + 5;
+    } else {
+      console.log('wrong');
+      timeLeft = timeLeft - 10;
+    }
   }
   var h2El = document.querySelector('#question-text');
   h2El.remove();
   questionIndex++;
   nextQuestion();
 }
-// Function for score
 
+// Function for score
+function getScore() {
+  if (questionIndex === questions.length - 1) {
+    clearInterval(timeInterval);
+    score.textContent = 'Score: ' + timeLeft;
+  }
+}
 // Function to show correct answer
 
 // Function for end game
 
 // Function to start timer
-var timeLeft = 60;
 function startTimer() {
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     if (timeLeft > 1) {
       timer.textContent = 'Timer: ' + timeLeft + ' seconds remaining.';
       timeLeft--;
