@@ -1,42 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Code Quiz</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="header header-box">
-            <header class="header">
-                <h1 class="title top-title">Code Quiz</h1>
-                <div class="info-bar">
-                    <p class="score top-title" id="score">Score:</p>
-                    <p class="timer top-title" id="timer">Timer:</p>
-                </div>
-            </header>
+      <div class="header header-box">
+        <header class="header">
+          <h1 class="title top-title">Code Quiz</h1>
+          <div class="info-bar">
+            <p class="score top-title" id="score">Score:</p>
+            <p class="timer top-title" id="timer">Timer:</p>
+          </div>
+        </header>
+      </div>
+      <div id="quiz-box" style="display: none">
+        <div id="question-div"></div>
+        <div id="choices-div">
+          <p><button id="choiceButtons" class="answerA buttons"></button></p>
+          <p><button id="choiceButtons" class="answerB buttons"></button></p>
+          <p><button id="choiceButtons" class="answerC buttons"></button></p>
+          <p><button id="choiceButtons" class="answerD buttons"></button></p>
+          <p id="correctAnswer">Correct answer is</p>
         </div>
-        <div id="quiz-box" style="display: none">
-            <div id="question-div">
-            </div>
-            <div id="choices-div">
-                <p><button id="choiceButtons" class="answerA  buttons"></button></p>
-                <p><button id="choiceButtons" class="answerB  buttons"></button></p>
-                <p><button id="choiceButtons" class="answerC  buttons"></button></p>
-                <p><button id="choiceButtons" class="answerD  buttons"></button></p>
-                <p id="correctAnswer">Correct answer is</p>
-            </div>
-        </div>
-        <div id="start-box">
-            <button class="buttons" id="start-btn">Start Quiz</button>
-            <button class="buttons" id="high-score">High Scores</button>
-        </div>
+      </div>
+      <div id="start-box">
+        <button class="buttons" id="start-btn">Start Quiz</button>
+        <button class="buttons" id="high-score">High Scores</button>
+      </div>
     </div>
     <script src="./assets/js/script.js"></script>
-</body>
-
+  </body>
 </html>

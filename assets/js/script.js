@@ -36,6 +36,10 @@ var highScore = document.querySelector('#high-score');
 var timer = document.querySelector('#timer');
 var score = document.querySelector('#score');
 
+var timeLeft = 60;
+var timeInterval;
+
+var questionIndex = 0;
 // Array of questions and choices and correct answers
 var questions = [
   {
@@ -55,6 +59,11 @@ var questions = [
   },
   {
     question: 'Which are loop statements in javaScript?',
+    answers: ['7', '42', '88', 'As many as the program calls for'],
+    correctAnswer: 'As many as the program calls for',
+  },
+  {
+    question: 'How many objects can an array hold?',
     answers: [
       'for Statement',
       'while Statement',
@@ -64,20 +73,12 @@ var questions = [
     correctAnswer: 'All of the above',
   },
   {
-    question: 'How many objects can an array hold?',
-    answers: ['7', '42', '88', 'As many as the program calls for'],
-    correctAnswer: 'As many as the program calls for',
-  },
-  {
     question: 'Which of these is NOT javascript object?',
     answers: ['Objective', 'Function', 'Boolean', 'Number'],
     correctAnswer: 'Objective',
   },
 ];
 
-// Create Quiz elements
-
-var questionIndex = 0;
 // Function to beginQuiz
 function beginQuiz() {
   startTimer();
@@ -102,43 +103,69 @@ var nextQuestion = function () {
   answerBtn3.textContent = questions[questionIndex].answers[2];
   answerBtn4.textContent = questions[questionIndex].answers[3];
 
-  answerBtn1.addEventListener('click', () => {
-    console.log('clicked A');
-  });
-  answerBtn2.addEventListener('click', () => {
-    console.log('clicked B');
-  });
-  answerBtn3.addEventListener('click', () => {
-    console.log('clicked C');
-  });
-  answerBtn4.addEventListener('click', () => {
-    console.log('clicked D');
-  });
+  getScore();
 };
 
 // Function for button clicks to check correct or incorrect answers
-function rightWrong(event) {
-  if (event.target.matches('#choiceButtons')) {
-    var h2El = document.querySelector('#question-text');
-
-    h2El.remove();
-
-    questionIndex++;
-    nextQuestion();
+function rightWrong(press) {
+  if (press.currentTarget.matches('.answerA')) {
+    if (
+      questions[questionIndex].answers[0] ===
+      questions[questionIndex].correctAnswer
+    ) {
+      timeLeft = timeLeft + 5;
+    } else {
+      timeLeft = timeLeft - 10;
+    }
+  } else if (press.currentTarget.matches('.answerB')) {
+    if (
+      questions[questionIndex].answers[1] ===
+      questions[questionIndex].correctAnswer
+    ) {
+      timeLeft = timeLeft + 5;
+    } else {
+      timeLeft = timeLeft - 10;
+    }
+  } else if (press.currentTarget.matches('.answerC')) {
+    if (
+      questions[questionIndex].answers[2] ===
+      questions[questionIndex].correctAnswer
+    ) {
+      timeLeft = timeLeft + 5;
+    } else {
+      timeLeft = timeLeft - 10;
+    }
+  } else if (press.currentTarget.matches('.answerD')) {
+    if (
+      questions[questionIndex].answers[3] ===
+      questions[questionIndex].correctAnswer
+    ) {
+      timeLeft = timeLeft + 5;
+    } else {
+      console.log('wrong');
+      timeLeft = timeLeft - 10;
+    }
   }
+  var h2El = document.querySelector('#question-text');
+  h2El.remove();
+  questionIndex++;
+  nextQuestion();
 }
 
 // Function for score
-
+function getScore() {
+  if (questionIndex === questions.length - 1) {
+    clearInterval(timeInterval);
+    score.textContent = 'Score: ' + timeLeft;
+  }
+}
 // Function to show correct answer
 
 // Function for end game
 
 // Function to start timer
 function startTimer() {
-  var timeLeft = 60;
-
-  var timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
     if (timeLeft > 1) {
       timer.textContent = 'Timer: ' + timeLeft + ' seconds remaining.';
       timeLeft--;
