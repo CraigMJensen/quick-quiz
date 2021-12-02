@@ -40,6 +40,7 @@ var timeLeft = 60;
 var timeInterval;
 
 var questionIndex = 0;
+var scores = [];
 // Array of questions and choices and correct answers
 var questions = [
   {
@@ -112,8 +113,11 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
+      quizBox.appendChild(showAnswer);
+      console.log('right');
     } else {
       timeLeft = timeLeft - 10;
+      console.log('wrong');
     }
   } else if (event.currentTarget.matches('.answerB')) {
     if (
@@ -121,8 +125,10 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
+      console.log('right');
     } else {
       timeLeft = timeLeft - 10;
+      console.log('wrong');
     }
   } else if (event.currentTarget.matches('.answerC')) {
     if (
@@ -130,8 +136,10 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
+      console.log('right');
     } else {
       timeLeft = timeLeft - 10;
+      console.log('wrong');
     }
   } else if (event.currentTarget.matches('.answerD')) {
     if (
@@ -139,8 +147,10 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
+      console.log('right');
     } else {
       timeLeft = timeLeft - 10;
+      console.log('wrong');
     }
   }
   questionIndex++;
@@ -161,10 +171,16 @@ function getScore() {
   timer.textContent = 'Timer:';
 
   quizBox.remove();
-  localStorage.setItem('score', timeLeft);
+
+  endGame();
 }
 
 // Function for end game
+function endGame() {
+  localStorage.setItem('scores', timeLeft);
+}
+
+function showHighScores() {}
 
 // Function to start timer
 function startTimer() {
@@ -187,3 +203,4 @@ answerBtn1.addEventListener('click', rightWrong);
 answerBtn2.addEventListener('click', rightWrong);
 answerBtn3.addEventListener('click', rightWrong);
 answerBtn4.addEventListener('click', rightWrong);
+highScore.addEventListener('click', showHighScores);
