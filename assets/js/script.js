@@ -27,10 +27,6 @@ var answerBtn4 = document.querySelector('.answerD');
 var buttonPress = document.querySelectorAll('#choiceButtons');
 
 var questionText = document.querySelector('#question-text');
-var answerA = document.querySelector('.answerA');
-var answerB = document.querySelector('.answerB');
-var answerC = document.querySelector('.answerC');
-var answerD = document.querySelector('.answerD');
 
 var showAnswer = document.querySelector('#correctAnswer');
 
@@ -40,126 +36,97 @@ var highScore = document.querySelector('#high-score');
 var timer = document.querySelector('#timer');
 var score = document.querySelector('#score');
 
-
 // Array of questions and choices and correct answers
-var question1 = "What does HTML stand for?";
-var question2 = "What symbol identifies an ID?";
-var question3 = "Which are loop statements in javaScript?";
-var question4 = "How many objects can an array hold?";
-var question5 = "Which of these is NOT javascript object?";
-var questionsArray = [question1, question2, question3, question4, question5];
-
-var choices1 = {
-    answers1: "Hyper Trainer Markup Language",
-    answers2: "Hyper Text Marketing Language",
-    answers3: "Hyper Text Markup Language",
-    answers4: "Hyper Text Marker Leveler"
-};
-var choices2 = {
-    answers1: "*",
-    answers2: "#",
-    answers3: "&",
-    answers4: "!"
-};
-var choices3 = {
-    answers1: "for Statement",
-    answers2: "while Statement",
-    answers3: "for...in Statement",
-    answers4: "All of the above"
-};
-var choices4 = {
-    answers1: "7",
-    answers2: "42",
-    answers3: "88",
-    answers4: "As many as the program calls for"
-};
-var choices5 = {
-    answers1: "Objective",
-    answers2: "Function",
-    answers3: "Boolean",
-    answers4: "Number"
-};
-var choicesArray = [choices1, choices2, choices3, choices4, choices5];
-
-var correctAnswer1 = choices1.answers3;
-var correctAnswer2 = choices2.answers2;
-var correctAnswer3 = choices3.answers4;
-var correctAnswer4 = choices4.answers4;
-var correctAnswer5 = choices5.answers1;
-var correctAnswersArray = [correctAnswer1, correctAnswer2, correctAnswer3, correctAnswer4, correctAnswer5];
-
+var questions = [
+  {
+    question: 'What does HTML stand for?',
+    answers: [
+      'Hyper Trainer Markup Language',
+      'Hyper Text Marketing Language',
+      'Hyper Text Markup Language',
+      'Hyper Text Marker Leveler',
+    ],
+    correctAnswer: 'Hyper Text Markup Language',
+  },
+  {
+    question: 'What symbol identifies an ID?',
+    answers: ['*', '#', '&', '!'],
+    correctAnswer: '#',
+  },
+  {
+    question: 'Which are loop statements in javaScript?',
+    answers: [
+      'for Statement',
+      'while Statement',
+      'for...in Statement',
+      'All of the above',
+    ],
+    correctAnswer: 'All of the above',
+  },
+  {
+    question: 'How many objects can an array hold?',
+    answers: ['7', '42', '88', 'As many as the program calls for'],
+    correctAnswer: 'As many as the program calls for',
+  },
+  {
+    question: 'Which of these is NOT javascript object?',
+    answers: ['Objective', 'Function', 'Boolean', 'Number'],
+    correctAnswer: 'Objective',
+  },
+];
 
 // Create Quiz elements
 
 var questionIndex = 0;
 // Function to beginQuiz
 function beginQuiz() {
-    startTimer();
-    startQuiz.disabled = true;
-    nextQuestion();
-
-
-
-};
+  startTimer();
+  startQuiz.disabled = true;
+  nextQuestion();
+}
 
 // Next question function
 var nextQuestion = function () {
+  var h2El = document.createElement('h2');
+  h2El.setAttribute('id', 'question-text');
+  body.appendChild(quizBox);
+  quizBox.appendChild(h2El);
+  quizBox.appendChild(answerBtn1);
+  quizBox.appendChild(answerBtn2);
+  quizBox.appendChild(answerBtn3);
+  quizBox.appendChild(answerBtn4);
 
+  h2El.textContent = questions[questionIndex].question;
+  answerBtn1.textContent = questions[questionIndex].answers[0];
+  answerBtn2.textContent = questions[questionIndex].answers[1];
+  answerBtn3.textContent = questions[questionIndex].answers[2];
+  answerBtn4.textContent = questions[questionIndex].answers[3];
 
-    var h2El = document.createElement('h2');
-    h2El.setAttribute('id', 'question-text');
-    body.appendChild(quizBox);
-    quizBox.appendChild(h2El);
-    quizBox.appendChild(answerBtn1);
-    quizBox.appendChild(answerBtn2);
-    quizBox.appendChild(answerBtn3);
-    quizBox.appendChild(answerBtn4);
-
-    h2El.textContent = questionsArray[questionIndex];
-    answerBtn1.textContent = (choicesArray[questionIndex].answers1);
-    answerBtn2.textContent = (choicesArray[questionIndex].answers2);
-    answerBtn3.textContent = (choicesArray[questionIndex].answers3);
-    answerBtn4.textContent = (choicesArray[questionIndex].answers4);
-
-
-
-    answerBtn1.addEventListener("click", () => {
-        console.log("clicked A");
-
-    })
-    answerBtn2.addEventListener("click", () => {
-        console.log("clicked B");
-
-    })
-    answerBtn3.addEventListener("click", () => {
-        console.log("clicked C");
-
-    })
-    answerBtn4.addEventListener("click", () => {
-        console.log("clicked D");
-
-    })
-
-
+  answerBtn1.addEventListener('click', () => {
+    console.log('clicked A');
+  });
+  answerBtn2.addEventListener('click', () => {
+    console.log('clicked B');
+  });
+  answerBtn3.addEventListener('click', () => {
+    console.log('clicked C');
+  });
+  answerBtn4.addEventListener('click', () => {
+    console.log('clicked D');
+  });
 };
-
 
 // Function for button clicks to check correct or incorrect answers
 function rightWrong(event) {
+  if (event.target.matches('#choiceButtons')) {
+    var h2El = document.querySelector('#question-text');
 
+    h2El.remove();
 
-    if (event.target.matches("#choiceButtons")) {
-        var h2El = document.querySelector('#question-text');
-
-        h2El.remove();
-
-
-
-        questionIndex++;
-        nextQuestion();
-    }
+    questionIndex++;
+    nextQuestion();
+  }
 }
-
 
 // Function for score
 
@@ -169,25 +136,24 @@ function rightWrong(event) {
 
 // Function to start timer
 function startTimer() {
-    var timeLeft = 60;
+  var timeLeft = 60;
 
-    var timeInterval = setInterval(function () {
-        if (timeLeft > 1) {
-            timer.textContent = 'Timer: ' + timeLeft + ' seconds remaining.';
-            timeLeft--;
-        } else if (timeLeft === 1) {
-            timer.textContent = 'Timer: ' + timeLeft + ' second remaining.';
-            timeLeft--
-        } else {
-            timer.textContent = 'Timer:';
-            clearInterval(timeInterval);
-        }
-    }, 1000);
-};
+  var timeInterval = setInterval(function () {
+    if (timeLeft > 1) {
+      timer.textContent = 'Timer: ' + timeLeft + ' seconds remaining.';
+      timeLeft--;
+    } else if (timeLeft === 1) {
+      timer.textContent = 'Timer: ' + timeLeft + ' second remaining.';
+      timeLeft--;
+    } else {
+      timer.textContent = 'Timer:';
+      clearInterval(timeInterval);
+    }
+  }, 1000);
+}
 
 startQuiz.addEventListener('click', beginQuiz);
-answerA.addEventListener('click', rightWrong);
-answerB.addEventListener('click', rightWrong);
-answerC.addEventListener('click', rightWrong);
-answerD.addEventListener('click', rightWrong);
-
+answerBtn1.addEventListener('click', rightWrong);
+answerBtn2.addEventListener('click', rightWrong);
+answerBtn3.addEventListener('click', rightWrong);
+answerBtn4.addEventListener('click', rightWrong);
