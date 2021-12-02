@@ -39,6 +39,7 @@ var score = document.querySelector('#score');
 var timeLeft = 60;
 var timeInterval;
 
+var questionIndex = 0;
 // Array of questions and choices and correct answers
 var questions = [
   {
@@ -78,7 +79,6 @@ var questions = [
   },
 ];
 
-var questionIndex = 0;
 // Function to beginQuiz
 function beginQuiz() {
   startTimer();
