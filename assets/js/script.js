@@ -34,6 +34,7 @@ var showAnswer = document.querySelector('#correctAnswer');
 var startQuiz = document.querySelector('#start-btn');
 
 var highScore = document.querySelector('#high-score');
+var highScoreRemove = document.querySelector('#high-score-remove');
 var timer = document.querySelector('#timer');
 var score = document.querySelector('#show-score');
 
@@ -41,7 +42,6 @@ var timeLeft = 60;
 var timeInterval;
 
 var questionIndex = 0;
-var scores = [];
 
 // Array of questions and choices and correct answers
 var questions = [
@@ -163,9 +163,12 @@ function rightWrong(event) {
     nextQuestion();
   } else {
     clearInterval(timeInterval);
+    showAnswers();
     getScore();
   }
 }
+
+function showAnswers() {}
 
 // Function for score
 function getScore() {
@@ -179,13 +182,49 @@ function getScore() {
 }
 
 function saveScore() {
-  localStorage.setItem('scores', timeLeft);
+  var highScore = (document.getElementById('show-score').value = timeLeft);
+  var savedScores = JSON.parse(localStorage.getItem('score')) || [];
+  savedScores.push(highScore);
+  localStorage.setItem('score', JSON.stringify(savedScores));
+}
+
+// Function for High Scores
+function showHighScore() {
+  var highScoreDiv = document.createElement('div');
+  var highScoreOlEl = document.createElement('ol');
+  var highScoreLiEl1 = document.createElement('li');
+  var highScoreLiEl2 = document.createElement('li');
+  var highScoreLiEl3 = document.createElement('li');
+  var highScoreLiEl4 = document.createElement('li');
+  var highScoreLiEl5 = document.createElement('li');
+  highScoreDiv.setAttribute('id', 'high-scores');
+  highScoreLiEl1.setAttribute('class', 'high-score-list');
+  highScoreLiEl2.setAttribute('class', 'high-score-list');
+  highScoreLiEl3.setAttribute('class', 'high-score-list');
+  highScoreLiEl4.setAttribute('class', 'high-score-list');
+  highScoreLiEl5.setAttribute('class', 'high-score-list');
+  highScoreDiv.textContent = 'High Scores';
+  highScoreLiEl1.innerHTML = localStorage.getItem('score');
+  highScoreLiEl2.innerHTML = localStorage.getItem('score');
+  highScoreLiEl3.innerHTML = localStorage.getItem('score');
+  highScoreLiEl4.innerHTML = localStorage.getItem('score');
+  highScoreLiEl5.innerHTML = localStorage.getItem('score');
+  body.appendChild(highScoreDiv);
+  highScoreDiv.appendChild(highScoreOlEl);
+  highScoreOlEl.appendChild(highScoreLiEl1);
+  highScoreOlEl.appendChild(highScoreLiEl2);
+  highScoreOlEl.appendChild(highScoreLiEl3);
+  highScoreOlEl.appendChild(highScoreLiEl4);
+  highScoreOlEl.appendChild(highScoreLiEl5);
+}
+
+function removeHighScoreList() {
+  var removeList = document.getElementById('high-scores');
+  removeList.remove();
 }
 
 // Function for end game
 function endGame() {}
-
-// Function for High Scores
 
 // Function to start timer
 function startTimer() {
@@ -208,4 +247,5 @@ answerBtn1.addEventListener('click', rightWrong);
 answerBtn2.addEventListener('click', rightWrong);
 answerBtn3.addEventListener('click', rightWrong);
 answerBtn4.addEventListener('click', rightWrong);
-// highScore.addEventListener('click', showHighScores);
+highScore.addEventListener('click', showHighScore);
+highScoreRemove.addEventListener('click', removeHighScoreList);
