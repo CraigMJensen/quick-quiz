@@ -190,11 +190,13 @@ function saveScore() {
 
 // Function for High Scores
 function showHighScore() {
+  highScore.disabled = true;
   var savedScores = JSON.parse(localStorage.getItem('score'));
   savedScores.sort(function (a, b) {
     return b - a;
   });
   console.log(savedScores);
+
   var highScoreDiv = document.createElement('div');
   var highScoreOlEl = document.createElement('ol');
   var highScoreLiEl1 = document.createElement('li');
@@ -222,10 +224,11 @@ function showHighScore() {
   highScoreOlEl.appendChild(highScoreLiEl4);
   highScoreOlEl.appendChild(highScoreLiEl5);
 }
-
+removeHighScoreList();
 function removeHighScoreList() {
   var removeList = document.getElementById('high-scores');
   removeList.remove();
+  highScore.disabled = false;
 }
 
 // Function for end game
