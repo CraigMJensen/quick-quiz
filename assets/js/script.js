@@ -115,7 +115,7 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
-      quizBox.appendChild(showAnswer);
+
       console.log('right');
     } else {
       timeLeft = timeLeft - 10;
@@ -173,19 +173,19 @@ function getScore() {
   timer.textContent = 'Timer:';
 
   quizBox.remove();
+  saveScore();
 
   endGame();
 }
 
-// Function for end game
-function endGame() {
-  quizBox.remove();
+function saveScore() {
+  localStorage.setItem('scores', timeLeft);
 }
 
+// Function for end game
+function endGame() {}
+
 // Function for High Scores
-function showHighScores() {
-  // highScoreList.textContent = scores;
-}
 
 // Function to start timer
 function startTimer() {
@@ -208,4 +208,4 @@ answerBtn1.addEventListener('click', rightWrong);
 answerBtn2.addEventListener('click', rightWrong);
 answerBtn3.addEventListener('click', rightWrong);
 answerBtn4.addEventListener('click', rightWrong);
-highScore.addEventListener('click', showHighScores);
+// highScore.addEventListener('click', showHighScores);
