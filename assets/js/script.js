@@ -25,6 +25,7 @@ var answerBtn2 = document.querySelector('.answerB');
 var answerBtn3 = document.querySelector('.answerC');
 var answerBtn4 = document.querySelector('.answerD');
 var buttonPress = document.querySelectorAll('#choiceButtons');
+var highScoreList = document.querySelector('#high-scores');
 
 var questionText = document.querySelector('#question-text');
 
@@ -177,10 +178,23 @@ function getScore() {
 
 // Function for end game
 function endGame() {
-  localStorage.setItem('scores', timeLeft);
+  var scores = localStorage.getItem('scores');
+  scores = scores ? scores.split(',') : [];
+  scores.push(timeLeft);
+  localStorage.setItem('scores', scores.toString());
+  highScore.addEventListener('click', showHighScores());
+
+  quizBox.remove();
 }
 
-function showHighScores() {}
+function showHighScores() {
+  var highScoreList = document.createElement('li');
+  var scores = localStorage.getItem('scores');
+  body.appendChild(quizBox);
+  quizBox.appendChild(highScoreList);
+
+  // highScoreList.textContent = scores;
+}
 
 // Function to start timer
 function startTimer() {
