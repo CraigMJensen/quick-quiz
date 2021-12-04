@@ -190,6 +190,11 @@ function saveScore() {
 
 // Function for High Scores
 function showHighScore() {
+  var savedScores = JSON.parse(localStorage.getItem('score'));
+  savedScores.sort(function (a, b) {
+    return b - a;
+  });
+  console.log(savedScores);
   var highScoreDiv = document.createElement('div');
   var highScoreOlEl = document.createElement('ol');
   var highScoreLiEl1 = document.createElement('li');
@@ -204,11 +209,11 @@ function showHighScore() {
   highScoreLiEl4.setAttribute('class', 'high-score-list');
   highScoreLiEl5.setAttribute('class', 'high-score-list');
   highScoreDiv.textContent = 'High Scores';
-  highScoreLiEl1.innerHTML = localStorage.getItem('score');
-  highScoreLiEl2.innerHTML = localStorage.getItem('score');
-  highScoreLiEl3.innerHTML = localStorage.getItem('score');
-  highScoreLiEl4.innerHTML = localStorage.getItem('score');
-  highScoreLiEl5.innerHTML = localStorage.getItem('score');
+  highScoreLiEl1.innerHTML = savedScores[0];
+  highScoreLiEl2.innerHTML = savedScores[1];
+  highScoreLiEl3.innerHTML = savedScores[2];
+  highScoreLiEl4.innerHTML = savedScores[3];
+  highScoreLiEl5.innerHTML = savedScores[4];
   body.appendChild(highScoreDiv);
   highScoreDiv.appendChild(highScoreOlEl);
   highScoreOlEl.appendChild(highScoreLiEl1);
