@@ -163,13 +163,10 @@ function rightWrong(event) {
     nextQuestion();
   } else {
     clearInterval(timeInterval);
+    highScore.disabled = false;
     showAnswers();
     getScore();
     endGame();
-    var playerName = prompt('Congratulations, Please enter your initials');
-    var savedPlayerName = JSON.parse(localStorage.getItem('username')) || [];
-    savedPlayerName.push(playerName);
-    localStorage.setItem('username', JSON.stringify(savedPlayerName));
   }
 }
 
@@ -186,22 +183,26 @@ function getScore() {
 
 function saveScore() {
   var highScore = (document.getElementById('show-score').value = timeLeft);
-  var savedScores = JSON.parse(localStorage.getItem('score')) || [];
-  savedScores.push(highScore);
-  localStorage.setItem('score', JSON.stringify(savedScores));
+  var playerName = prompt('Congratulations, Please enter your initials');
+
+  var nameScore = { playerName, highScore };
+  var savedNameScore = JSON.parse(localStorage.getItem('nameScoreArr')) || [];
+  savedNameScore.push(nameScore);
+  localStorage.setItem('nameScoreArr', JSON.stringify(savedNameScore));
 }
 
 // Function for High Scores
 function showHighScore() {
   highScore.disabled = true;
 
-  var savedPlayerName = JSON.parse(localStorage.getItem('username'));
-
-  var savedScores = JSON.parse(localStorage.getItem('score'));
-  savedScores.sort(function (a, b) {
-    return b - a;
+  var savedNameScore = JSON.parse(localStorage.getItem('nameScoreArr'));
+  savedNameScore.sort(function (a, b) {
+    if (a.highScore === b.highScore) {
+      return b.highScore - a.highScore;
+    }
+    return a.highScore < b.highScore ? 1 : -1;
   });
-  console.log(savedScores);
+  console.log(savedNameScore);
 
   var highScoreDiv = document.createElement('div');
   var highScoreOlEl = document.createElement('ol');
@@ -217,18 +218,24 @@ function showHighScore() {
   highScoreLiEl4.setAttribute('class', 'high-score-list');
   highScoreLiEl5.setAttribute('class', 'high-score-list');
   highScoreDiv.textContent = 'High Scores';
-  highScoreLiEl1.innerHTML = savedScores[0] + ' ' + savedPlayerName[0];
-  highScoreLiEl2.innerHTML = savedScores[1] + ' ' + savedPlayerName[1];
-  highScoreLiEl3.innerHTML = savedScores[2] + ' ' + savedPlayerName[2];
-  highScoreLiEl4.innerHTML = savedScores[3] + ' ' + savedPlayerName[3];
-  highScoreLiEl5.innerHTML = savedScores[4] + ' ' + savedPlayerName[4];
+  highScoreLiEl1.innerHTML =
+    savedNameScore[0].playerName +
+    ' is in First Place with ' +
+    savedNameScore[0].highScore;
+  highScoreLiEl2.innerHTML =
+    savedNameScore[1].playerName +
+    ' is in Second Place with ' +
+    savedNameScore[1].highScore;
+  highScoreLiEl3.innerHTML =
+    savedNameScore[2].playerName +
+    ' is in Third Place with ' +
+    savedNameScore[2].highScore;
+
   body.appendChild(highScoreDiv);
   highScoreDiv.appendChild(highScoreOlEl);
   highScoreOlEl.appendChild(highScoreLiEl1);
   highScoreOlEl.appendChild(highScoreLiEl2);
   highScoreOlEl.appendChild(highScoreLiEl3);
-  highScoreOlEl.appendChild(highScoreLiEl4);
-  highScoreOlEl.appendChild(highScoreLiEl5);
 }
 removeHighScoreList();
 function removeHighScoreList() {
