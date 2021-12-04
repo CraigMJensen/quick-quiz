@@ -165,6 +165,11 @@ function rightWrong(event) {
     clearInterval(timeInterval);
     showAnswers();
     getScore();
+    endGame();
+    var playerName = prompt('Congratulations, Please enter your initials');
+    var savedPlayerName = JSON.parse(localStorage.getItem('username')) || [];
+    savedPlayerName.push(playerName);
+    localStorage.setItem('username', JSON.stringify(savedPlayerName));
   }
 }
 
@@ -177,8 +182,6 @@ function getScore() {
 
   quizBox.remove();
   saveScore();
-
-  endGame();
 }
 
 function saveScore() {
@@ -191,6 +194,9 @@ function saveScore() {
 // Function for High Scores
 function showHighScore() {
   highScore.disabled = true;
+
+  var savedPlayerName = JSON.parse(localStorage.getItem('username'));
+
   var savedScores = JSON.parse(localStorage.getItem('score'));
   savedScores.sort(function (a, b) {
     return b - a;
@@ -211,11 +217,11 @@ function showHighScore() {
   highScoreLiEl4.setAttribute('class', 'high-score-list');
   highScoreLiEl5.setAttribute('class', 'high-score-list');
   highScoreDiv.textContent = 'High Scores';
-  highScoreLiEl1.innerHTML = savedScores[0];
-  highScoreLiEl2.innerHTML = savedScores[1];
-  highScoreLiEl3.innerHTML = savedScores[2];
-  highScoreLiEl4.innerHTML = savedScores[3];
-  highScoreLiEl5.innerHTML = savedScores[4];
+  highScoreLiEl1.innerHTML = savedScores[0] + ' ' + savedPlayerName[0];
+  highScoreLiEl2.innerHTML = savedScores[1] + ' ' + savedPlayerName[1];
+  highScoreLiEl3.innerHTML = savedScores[2] + ' ' + savedPlayerName[2];
+  highScoreLiEl4.innerHTML = savedScores[3] + ' ' + savedPlayerName[3];
+  highScoreLiEl5.innerHTML = savedScores[4] + ' ' + savedPlayerName[4];
   body.appendChild(highScoreDiv);
   highScoreDiv.appendChild(highScoreOlEl);
   highScoreOlEl.appendChild(highScoreLiEl1);
@@ -232,7 +238,13 @@ function removeHighScoreList() {
 }
 
 // Function for end game
-function endGame() {}
+
+function endGame() {
+  startQuiz.disabled = false;
+  questionIndex = 0;
+  timeLeft = 60;
+  quizBox.textContent = '';
+}
 
 // Function to start timer
 function startTimer() {
