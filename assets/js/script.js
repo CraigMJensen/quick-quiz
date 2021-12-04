@@ -24,7 +24,7 @@ var answerBtn1 = document.querySelector('.answerA');
 var answerBtn2 = document.querySelector('.answerB');
 var answerBtn3 = document.querySelector('.answerC');
 var answerBtn4 = document.querySelector('.answerD');
-var buttonPress = document.querySelectorAll('#choiceButtons');
+
 var highScoreList = document.querySelector('#high-scores');
 
 var questionText = document.querySelector('#question-text');
@@ -35,13 +35,14 @@ var startQuiz = document.querySelector('#start-btn');
 
 var highScore = document.querySelector('#high-score');
 var timer = document.querySelector('#timer');
-var score = document.querySelector('#score');
+var score = document.querySelector('#show-score');
 
 var timeLeft = 60;
 var timeInterval;
 
 var questionIndex = 0;
 var scores = [];
+
 // Array of questions and choices and correct answers
 var questions = [
   {
@@ -168,7 +169,7 @@ function rightWrong(event) {
 
 // Function for score
 function getScore() {
-  score.textContent = 'Score: ' + timeLeft;
+  score.textContent = timeLeft;
   timer.textContent = 'Timer:';
 
   quizBox.remove();
@@ -178,35 +179,11 @@ function getScore() {
 
 // Function for end game
 function endGame() {
-  var scores = localStorage.getItem('scores');
-  scores = scores ? scores.split(',') : [];
-  scores.push(timeLeft);
-  localStorage.setItem('scores', scores.toString());
-
   quizBox.remove();
 }
 
 // Function for High Scores
 function showHighScores() {
-  var highScoreDivEl = document.createElement('div');
-  var highScoreListEl = document.createElement('ol');
-  var scoreListItem1 = document.createElement('li');
-  var scoreListItem2 = document.createElement('li');
-  var scoreListItem3 = document.createElement('li');
-  var scoreListItem4 = document.createElement('li');
-  var scoreListItem5 = document.createElement('li');
-  var scores = localStorage.getItem('scores');
-  highScoreDivEl.setAttribute('id', 'high-scores');
-  body.appendChild(highScoreDivEl);
-  highScoreDivEl.appendChild(highScoreListEl);
-  highScoreListEl.appendChild(scoreListItem1);
-  highScoreListEl.appendChild(scoreListItem2);
-  highScoreListEl.appendChild(scoreListItem3);
-  highScoreListEl.appendChild(scoreListItem4);
-  highScoreListEl.appendChild(scoreListItem5);
-  console.log(scores);
-  scoreListItem1.textContent = 'hello';
-
   // highScoreList.textContent = scores;
 }
 

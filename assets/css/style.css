@@ -22,7 +22,28 @@ body {
 
 .info-bar {
   display: flex;
+  justify-content: space-around;
   padding: 1rem;
+}
+
+.info-bar .score {
+  display: flex;
+  justify-content: right;
+}
+
+.info-bar .timer {
+  display: flex;
+  justify-content: left;
+}
+
+#show-score {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+  text-decoration: underline;
+  background-color: lightseagreen;
+  color: darkblue;
+  font-size: 3em;
 }
 
 #question-div,
