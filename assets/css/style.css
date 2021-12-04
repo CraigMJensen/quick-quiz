@@ -25,11 +25,14 @@ body {
   padding: 1rem;
 }
 
-#question-div {
+#question-div,
+#high-scores {
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  list-style: inside;
+  font-size: 2rem;
   margin: 0 auto;
   width: 60%;
   height: 100%;
