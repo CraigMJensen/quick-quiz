@@ -29,6 +29,7 @@ var highScoreList = document.querySelector('#high-scores');
 
 var questionText = document.querySelector('#question-text');
 
+var showAnswerDiv = document.querySelector('#right-wrong-answer');
 var showAnswer = document.querySelector('#correctAnswer');
 
 var startQuiz = document.querySelector('#start-btn');
@@ -37,8 +38,25 @@ var highScore = document.querySelector('#high-score');
 var highScoreRemove = document.querySelector('#high-score-remove');
 var timer = document.querySelector('#timer');
 var score = document.querySelector('#show-score');
+var getName;
 
-var timeLeft = 30;
+var h2El = document.createElement('h2');
+var highScoreDiv = document.createElement('div');
+var highScoreOlEl = document.createElement('ol');
+var highScoreLiEl1 = document.createElement('li');
+var highScoreLiEl2 = document.createElement('li');
+var highScoreLiEl3 = document.createElement('li');
+var rightWrongAnswer = document.createElement('div');
+var correctAnswerEl = document.createElement('p');
+h2El.setAttribute('id', 'question-text');
+highScoreDiv.setAttribute('id', 'high-scores');
+highScoreLiEl1.setAttribute('class', 'high-score-list');
+highScoreLiEl2.setAttribute('class', 'high-score-list');
+highScoreLiEl3.setAttribute('class', 'high-score-list');
+rightWrongAnswer.setAttribute('id', 'right-wrong-answer');
+correctAnswerEl.setAttribute('id', 'correctAnswer');
+
+var timeLeft = 60;
 var timeInterval;
 
 var questionIndex = 0;
@@ -91,8 +109,6 @@ function beginQuiz() {
 
 // Next question function
 var nextQuestion = function () {
-  var h2El = document.createElement('h2');
-  h2El.setAttribute('id', 'question-text');
   body.appendChild(quizBox);
   quizBox.appendChild(h2El);
   quizBox.appendChild(answerBtn1);
@@ -115,11 +131,14 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
+      rightWrongAnswer.remove();
     } else {
-      alert(
-        'Incorrect. The right answer is ' +
-          questions[questionIndex].correctAnswer
-      );
+      body.appendChild(rightWrongAnswer);
+      rightWrongAnswer.appendChild(correctAnswerEl);
+      correctAnswerEl.textContent =
+        'Incorrect. The right answer was ' +
+        questions[questionIndex].correctAnswer;
+
       timeLeft = timeLeft - 10;
     }
   } else if (event.currentTarget.matches('.answerB')) {
@@ -128,11 +147,15 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
+      rightWrongAnswer.remove();
     } else {
-      alert(
+      rightWrongAnswer.remove();
+      body.appendChild(rightWrongAnswer);
+      rightWrongAnswer.appendChild(correctAnswerEl);
+      correctAnswerEl.textContent =
         'Incorrect. The right answer is ' +
-          questions[questionIndex].correctAnswer
-      );
+        questions[questionIndex].correctAnswer;
+
       timeLeft = timeLeft - 10;
     }
   } else if (event.currentTarget.matches('.answerC')) {
@@ -141,11 +164,14 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
+      rightWrongAnswer.remove();
     } else {
-      alert(
+      body.appendChild(rightWrongAnswer);
+      rightWrongAnswer.appendChild(correctAnswerEl);
+      correctAnswerEl.textContent =
         'Incorrect. The right answer is ' +
-          questions[questionIndex].correctAnswer
-      );
+        questions[questionIndex].correctAnswer;
+
       timeLeft = timeLeft - 10;
     }
   } else if (event.currentTarget.matches('.answerD')) {
@@ -154,17 +180,19 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
+      rightWrongAnswer.remove();
     } else {
-      alert(
+      body.appendChild(rightWrongAnswer);
+      rightWrongAnswer.appendChild(correctAnswerEl);
+      correctAnswerEl.textContent =
         'Incorrect. The right answer is ' +
-          questions[questionIndex].correctAnswer
-      );
+        questions[questionIndex].correctAnswer;
+
       timeLeft = timeLeft - 10;
     }
   }
   questionIndex++;
   if (questionIndex < questions.length) {
-    var h2El = document.querySelector('#question-text');
     h2El.remove();
 
     nextQuestion();
@@ -173,27 +201,36 @@ function rightWrong(event) {
     highScore.disabled = false;
 
     getScore();
-    endGame();
   }
 }
 
 // Function for score
+
 function getScore() {
   score.textContent = timeLeft;
   timer.textContent = 'Timer:';
 
   quizBox.remove();
+
   saveScore();
 }
 
 function saveScore() {
-  var highScore = (document.getElementById('show-score').value = timeLeft);
-  var playerName = prompt('Congratulations, Please enter your initials');
+  getName = setInterval(function () {
+    var highScore = (document.getElementById('show-score').value = timeLeft);
 
-  var nameScore = { playerName, highScore };
-  var savedNameScore = JSON.parse(localStorage.getItem('nameScoreArr')) || [];
-  savedNameScore.push(nameScore);
-  localStorage.setItem('nameScoreArr', JSON.stringify(savedNameScore));
+    var playerName = prompt('Congratulations, Please enter your initials.');
+    while (playerName === '') {
+      playerName = prompt('You need to enter your Name or Initials');
+    }
+    var nameScore = { playerName, highScore };
+    var savedNameScore = JSON.parse(localStorage.getItem('nameScoreArr')) || [];
+    savedNameScore.push(nameScore);
+    localStorage.setItem('nameScoreArr', JSON.stringify(savedNameScore));
+    clearInterval(getName);
+    rightWrongAnswer.remove();
+    endGame();
+  }, 200);
 }
 
 // Function for High Scores
@@ -208,17 +245,6 @@ function showHighScore() {
     return a.highScore < b.highScore ? 1 : -1;
   });
   console.log(savedNameScore);
-
-  var highScoreDiv = document.createElement('div');
-  var highScoreOlEl = document.createElement('ol');
-  var highScoreLiEl1 = document.createElement('li');
-  var highScoreLiEl2 = document.createElement('li');
-  var highScoreLiEl3 = document.createElement('li');
-
-  highScoreDiv.setAttribute('id', 'high-scores');
-  highScoreLiEl1.setAttribute('class', 'high-score-list');
-  highScoreLiEl2.setAttribute('class', 'high-score-list');
-  highScoreLiEl3.setAttribute('class', 'high-score-list');
 
   highScoreDiv.textContent = 'High Scores';
 
@@ -255,7 +281,7 @@ function removeHighScoreList() {
 function endGame() {
   startQuiz.disabled = false;
   questionIndex = 0;
-  timeLeft = 30;
+  timeLeft = 60;
   quizBox.textContent = '';
 }
 

@@ -53,7 +53,8 @@ body {
 }
 
 #question-div,
-#high-scores {
+#high-scores,
+#right-wrong-answer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -75,8 +76,8 @@ body {
 
 #correctAnswer {
   font-size: 1.8rem;
+  font-weight: bolder;
   margin-bottom: 1rem;
-  border-top: 0.125rem solid darkblue;
 }
 
 #start-box {
