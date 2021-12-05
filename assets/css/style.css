@@ -30,6 +30,7 @@ body {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
+  font-size: x-small;
 }
 
 .info-bar .score {
