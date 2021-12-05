@@ -20,4 +20,4 @@
 
 Screenshot
 
-(img\code-quiz-img.png)
+(./img/code-quiz-img.png)
