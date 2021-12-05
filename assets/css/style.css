@@ -98,8 +98,8 @@ body {
   font-size: 1.5rem;
 }
 
-.choiceButtons:hover {
-  background-color: cornflowerblue;
+.buttons:hover {
+  background-color: rgb(77, 145, 247);
   color: darkblue;
 }
 

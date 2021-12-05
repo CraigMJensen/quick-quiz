@@ -248,17 +248,17 @@ function showHighScore() {
 
   highScoreDiv.textContent = 'High Scores';
 
-  highScoreLiEl1.innerHTML =
+  highScoreLiEl1.textContent =
     savedNameScore[0].playerName +
     ' is in First Place with ' +
     savedNameScore[0].highScore;
 
-  highScoreLiEl2.innerHTML =
+  highScoreLiEl2.textContent =
     savedNameScore[1].playerName +
     ' is in Second Place with ' +
     savedNameScore[1].highScore;
 
-  highScoreLiEl3.innerHTML =
+  highScoreLiEl3.textContent =
     savedNameScore[2].playerName +
     ' is in Third Place with ' +
     savedNameScore[2].highScore;
