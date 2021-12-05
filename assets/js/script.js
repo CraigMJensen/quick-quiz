@@ -38,7 +38,7 @@ var highScoreRemove = document.querySelector('#high-score-remove');
 var timer = document.querySelector('#timer');
 var score = document.querySelector('#show-score');
 
-var timeLeft = 60;
+var timeLeft = 30;
 var timeInterval;
 
 var questionIndex = 0;
@@ -115,11 +115,12 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
-
-      console.log('right');
     } else {
+      alert(
+        'Incorrect. The right answer is ' +
+          questions[questionIndex].correctAnswer
+      );
       timeLeft = timeLeft - 10;
-      console.log('wrong');
     }
   } else if (event.currentTarget.matches('.answerB')) {
     if (
@@ -127,10 +128,12 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
-      console.log('right');
     } else {
+      alert(
+        'Incorrect. The right answer is ' +
+          questions[questionIndex].correctAnswer
+      );
       timeLeft = timeLeft - 10;
-      console.log('wrong');
     }
   } else if (event.currentTarget.matches('.answerC')) {
     if (
@@ -138,10 +141,12 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
-      console.log('right');
     } else {
+      alert(
+        'Incorrect. The right answer is ' +
+          questions[questionIndex].correctAnswer
+      );
       timeLeft = timeLeft - 10;
-      console.log('wrong');
     }
   } else if (event.currentTarget.matches('.answerD')) {
     if (
@@ -149,10 +154,12 @@ function rightWrong(event) {
       questions[questionIndex].correctAnswer
     ) {
       timeLeft = timeLeft + 5;
-      console.log('right');
     } else {
+      alert(
+        'Incorrect. The right answer is ' +
+          questions[questionIndex].correctAnswer
+      );
       timeLeft = timeLeft - 10;
-      console.log('wrong');
     }
   }
   questionIndex++;
@@ -164,13 +171,11 @@ function rightWrong(event) {
   } else {
     clearInterval(timeInterval);
     highScore.disabled = false;
-    showAnswers();
+
     getScore();
     endGame();
   }
 }
-
-function showAnswers() {}
 
 // Function for score
 function getScore() {
@@ -209,23 +214,24 @@ function showHighScore() {
   var highScoreLiEl1 = document.createElement('li');
   var highScoreLiEl2 = document.createElement('li');
   var highScoreLiEl3 = document.createElement('li');
-  var highScoreLiEl4 = document.createElement('li');
-  var highScoreLiEl5 = document.createElement('li');
+
   highScoreDiv.setAttribute('id', 'high-scores');
   highScoreLiEl1.setAttribute('class', 'high-score-list');
   highScoreLiEl2.setAttribute('class', 'high-score-list');
   highScoreLiEl3.setAttribute('class', 'high-score-list');
-  highScoreLiEl4.setAttribute('class', 'high-score-list');
-  highScoreLiEl5.setAttribute('class', 'high-score-list');
+
   highScoreDiv.textContent = 'High Scores';
+
   highScoreLiEl1.innerHTML =
     savedNameScore[0].playerName +
     ' is in First Place with ' +
     savedNameScore[0].highScore;
+
   highScoreLiEl2.innerHTML =
     savedNameScore[1].playerName +
     ' is in Second Place with ' +
     savedNameScore[1].highScore;
+
   highScoreLiEl3.innerHTML =
     savedNameScore[2].playerName +
     ' is in Third Place with ' +
@@ -249,7 +255,7 @@ function removeHighScoreList() {
 function endGame() {
   startQuiz.disabled = false;
   questionIndex = 0;
-  timeLeft = 60;
+  timeLeft = 30;
   quizBox.textContent = '';
 }
 
@@ -264,6 +270,8 @@ function startTimer() {
       timeLeft--;
     } else {
       timer.textContent = 'Timer:';
+      endGame();
+      alert('You did not finish. Please try again!');
       clearInterval(timeInterval);
     }
   }, 1000);

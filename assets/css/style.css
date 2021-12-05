@@ -1,6 +1,7 @@
 body {
   box-sizing: border-box;
   margin: 0 auto;
+  background-color: darkblue;
 }
 
 .header {
@@ -18,6 +19,11 @@ body {
   background-color: lightseagreen;
   color: darkblue;
   font-size: 3em;
+}
+
+.rules {
+  text-align: center;
+  color: darkblue;
 }
 
 .info-bar {
