@@ -20,4 +20,4 @@
 
 Screenshot
 
-(/code-quiz/assets/img/code-quiz-img.png?raw=true&sanitize=true)
+[code-quiz-img.png](https://postimg.cc/ns3Qrz9q)
