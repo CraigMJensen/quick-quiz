@@ -20,4 +20,4 @@
 
 Screenshot
 
-[code-quiz-img.png](https://postimg.cc/ns3Qrz9q)
+![](img/code-quiz-img.png)
